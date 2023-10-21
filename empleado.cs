@@ -1,28 +1,29 @@
 using System;
 
-class Pelicula
+class Empleado
 {
-    public string Titulo { get; set; }
-    public int AnioLanzamiento { get; set; }
-    public double Calificacion { get; private set; }
+    // Propiedades
+    public string Nombre { get; set; }
+    public double Salario { get; set; }
 
-    public Pelicula(string titulo, int anioLanzamiento)
+    // Constructor
+    public Empleado(string nombre)
     {
-        Titulo = titulo;
-        AnioLanzamiento = anioLanzamiento;
-        Calificacion = 0; // Inicializamos la calificación en 0.
+        Nombre = nombre;
+        Salario = 0; // Inicializamos el salario en 0
     }
 
-    public void Calificar(int calificacion)
+    // Método para agregar el salario manualmente
+    public void AgregarSalarioManualmente()
     {
-        if (calificacion >= 1 && calificacion <= 5)
-        {
-            Calificacion = calificacion;
-        }
-        else
-        {
-            Console.WriteLine("La calificación debe estar en el rango de 1 a 5.");
-        }
+        Console.Write($"Introduce el salario de {Nombre}: ");
+        Salario = Convert.ToDouble(Console.ReadLine());
+    }
+
+    // Método para calcular el salario anual manualmente
+    public double CalcularSalarioAnualManual()
+    {
+        return Salario * 12;
     }
 }
 
@@ -30,14 +31,20 @@ class Program
 {
     static void Main()
     {
-        Pelicula pelicula1 = new Pelicula("Talk to me", 2023);
-        pelicula1.Calificar(5); // Calificamos la película con un 4.
+        // Crear objetos Empleado
+        Empleado empleado1 = new Empleado("Juan");
+        Empleado empleado2 = new Empleado("María");
 
-        Pelicula pelicula2 = new Pelicula("Barbie", 2023);
-        pelicula2.Calificar(4); // Calificamos la película con un 5.
+        // Agregar salarios manualmente
+        empleado1.AgregarSalarioManualmente();
+        empleado2.AgregarSalarioManualmente();
 
-        Console.WriteLine($"Pelicula 1: {pelicula1.Titulo} ({pelicula1.AnioLanzamiento}), Calificación: {pelicula1.Calificacion}");
-        Console.WriteLine($"Pelicula 2: {pelicula2.Titulo} ({pelicula2.AnioLanzamiento}), Calificación: {pelicula2.Calificacion}");
+        // Calcular el salario anual manualmente
+        double salarioAnualManualEmpleado1 = empleado1.CalcularSalarioAnualManual();
+        double salarioAnualManualEmpleado2 = empleado2.CalcularSalarioAnualManual();
+
+        Console.WriteLine($"El salario anual de {empleado1.Nombre} es: {salarioAnualManualEmpleado1:C}");
+        Console.WriteLine($"El salario anual de {empleado2.Nombre} es: {salarioAnualManualEmpleado2:C}");
     }
 }
 
